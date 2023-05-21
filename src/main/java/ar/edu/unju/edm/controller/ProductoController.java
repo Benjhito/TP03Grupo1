@@ -11,21 +11,20 @@ import ar.edu.unju.edm.util.Productos;
 
 @Controller
 public class ProductoController {
-//	@Autowired
-//	Producto unProducto;
+	@Autowired
+	Producto unProducto;
 	@Autowired
 	ProductoService unServicio;
 	
 	@GetMapping("/index")
 	public ModelAndView mostrarIndex() {
 		ModelAndView name = new ModelAndView("index");
+		
 		return name;
 	}
 	
 	@GetMapping("/producto")
 	public ModelAndView solicitarProducto() {
-		Producto unProducto = new Producto();
-		
 		ModelAndView name = new ModelAndView("producto");
 		name.addObject("unProducto", unProducto);
 		
@@ -33,7 +32,7 @@ public class ProductoController {
 	}
 
 	@PostMapping("/guardarProducto")
-	public ModelAndView cargarProducto(@ModelAttribute("producto") Producto nuevoProducto, Productos listado) {
+	public ModelAndView cargarProducto(@ModelAttribute("producto") Producto nuevoProducto) {
 		nuevoProducto.setEstado(true);
 		Productos.getListadoDeProductos().add(nuevoProducto);
 		
