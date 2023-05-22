@@ -27,14 +27,27 @@ public class ImpProductoService implements ProductoService {
 
 	@Override
 	public Producto eliminarUnProducto(Integer codigo) {
-		// TODO Auto-generated method stub
-		return null;
+		ArrayList<Producto> listaProductos = Productos.getListadoDeProductos();
+		Producto productoAEliminar = null;
+		
+		for (Producto producto : listaProductos) {
+			if (producto.getCodigo().equals(codigo)) {
+				productoAEliminar = producto;
+				break;
+			}
+		}
+		
+		if (productoAEliminar != null) {
+			listaProductos.remove(productoAEliminar);
+		}
+		
+		return productoAEliminar;
 	}
 
 	@Override
-	public void eliminarTodasLosProductos() {
-		// TODO Auto-generated method stub
-		
+	public void eliminarTodosLosProductos() {
+		ArrayList<Producto> listaProductos = Productos.getListadoDeProductos();
+		listaProductos.clear();
 	}
 
 	@Override

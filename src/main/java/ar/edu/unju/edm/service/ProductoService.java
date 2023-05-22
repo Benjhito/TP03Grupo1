@@ -9,6 +9,6 @@ public interface ProductoService {
 	public ArrayList<Producto> listarProducto();
 	public Producto mostrarUnProducto(Integer codigo);
 	public Producto eliminarUnProducto(Integer codigo);
-	public void eliminarTodasLosProductos();
+	public void eliminarTodosLosProductos();
 	public Producto modificarUnProducto(Integer codigo);
 }

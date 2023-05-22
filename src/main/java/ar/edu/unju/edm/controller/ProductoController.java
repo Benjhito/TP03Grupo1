@@ -7,7 +7,6 @@ import org.springframework.web.servlet.ModelAndView;
 import org.springframework.beans.factory.annotation.Autowired;
 import ar.edu.unju.edm.model.Producto;
 import ar.edu.unju.edm.service.ProductoService;
-import ar.edu.unju.edm.util.Productos;
 
 @Controller
 public class ProductoController {
@@ -33,12 +32,32 @@ public class ProductoController {
 
 	@PostMapping("/guardarProducto")
 	public ModelAndView cargarProducto(@ModelAttribute("producto") Producto nuevoProducto) {
-		nuevoProducto.setEstado(true);
-		Productos.getListadoDeProductos().add(nuevoProducto);
-		
-		ModelAndView listadoFinal= new ModelAndView("mostrarListado");
-		listadoFinal.addObject("listado", Productos.getListadoDeProductos());
-		
-		return listadoFinal;
+	    nuevoProducto.setEstado(true);
+	    unServicio.cargarProducto(nuevoProducto);
+	    
+	    ModelAndView listadoFinal = new ModelAndView("mostrarListado");
+	    listadoFinal.addObject("listado", unServicio.listarProducto());
+	    
+	    return listadoFinal;
 	}
+	
+	@PostMapping("/eliminarProducto")
+	  public ModelAndView eliminarProducto(@ModelAttribute("codigo") Integer codigo) {
+	      unServicio.eliminarUnProducto(codigo);
+	      
+	      ModelAndView listadoFinal = new ModelAndView("mostrarListado");
+	      listadoFinal.addObject("listado", unServicio.listarProducto());
+	      
+	      return listadoFinal;
+	  }
+	  
+	  @PostMapping("/eliminarTodosLosProductos")
+	  public ModelAndView eliminarTodosLosProductos() {
+	      unServicio.eliminarTodosLosProductos();
+	      
+	      ModelAndView listadoFinal = new ModelAndView("mostrarListado");
+	      listadoFinal.addObject("listado", unServicio.listarProducto());
+	      
+	      return listadoFinal;
+	  }
 }
