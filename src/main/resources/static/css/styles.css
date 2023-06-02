@@ -1,41 +1,66 @@
 @import url(https://fonts.googleapis.com/css?family=Inconsolata);
-@font-face {
-  font-family: "Inconsolata";
-  src: url(../fonts/inconsolata.ttf);
-}
-@font-face {
-  font-family: "Poppins";
-  src: url(../fonts/Poppins-Bold.ttf);
-}
+
+
 /*(que no se note el ctrl + c y v) xd*/
 * {
   box-sizing: border-box;
 }
 body {
-  margin: 0;
-  font-family: "Inconsolata";
+  font-family: Arial, Helvetica, sans-serif;
+  line-height: 1.6em;
 }
-img {
-  display: block;
+.container-h{
+  width: 85%;
+  max-width: 850px;
+  margin: 0 auto;
+}
+/* Cabecera - Ortiz */
+.header{
+  background: #272727;
+  color: white;
+  padding: 2rem 0;
+  z-index: 10;
+
+  position: fixed;
+  left: 0;
+  top: 0;
   width: 100%;
 }
-.main-header {
-  padding: 0 20px;
+.header a{
+  color: white;
+  text-decoration: none;
 }
-.main-header__title{
-  text-align: center;
-  font-size: 2.5em;
-  margin: 10px 0;
-  color: #454546;
-  font-family: "Poppins";
-}
-.main-header__container{
+.logo-nav-container{
   display: flex;
   justify-content: space-between;
   align-items: center;
 }
-.main-header__link {
-  color: #333;
+.logo{
+  letter-spacing: 5px;
+  font-size: 2.2em;
+}
+.logo-desc{
+  display: flex;
+  color: #777;
+}
+.nav ul{
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+.nav ul li{
+  display: inline-block;
+}
+.nav ul li a{
+  display: block;
+  padding: 0.5rem 1rem;
+  transition: all 0.4s linear;
+  border-radius: 5px;
+}
+
+.nav ul li a:hover{
+  color: white;
+  background-color: #4a4a4a;
 }
 
 /* Estilos del Menu */
@@ -89,23 +114,13 @@ img {
   cursor: pointer;
   margin-left: auto;
 }
-.main-header__btn{
-  display: block;
-  padding: 10px 30px;
-  color: #454546;
-  border: 1px solid #454546;
-  text-decoration: none;
-}
-.main-header__input{
-  display: block;
-  padding: 10px;
-  width: 50%;
-}
-
-
 
 .main {
   padding: 0 20px;
+}
+
+.container{
+  padding: 7rem 0 2rem 0;
 }
 
 /* ESTILOS DE SLIDER */
@@ -334,31 +349,11 @@ img {
 }
 
 .main-footer{
-  background: #151515;
+  background: #272727;
   color: white;
   padding: 30px 20px;
 }
-.footer__title{
-  border-bottom: 1px dotted #555;
-  padding-bottom: 20px;
-}
-.footer__txt {
-  color: #555;
-}
-.footer__link{
-  color: #555;
-  text-decoration: none;
-  display: block;
-  padding: 10px 0;
-}
 
-.footer__input{
-  background: #151515;
-  width: 100%;
-  display: block;
-  padding: 20px;
-  border: 1px solid #555;
-}
 .copy {
   color: #555;
 }
@@ -408,6 +403,8 @@ form{
   background: fixed;
   background-color: #FF4E00;
 }
+
+
 
 /*Estilos para tablet*/
 @media screen and (min-width:768px) {
@@ -554,16 +551,18 @@ form{
 /*Carrosel*/
 
 .carousel {
+  margin-top: 7rem;
   margin-bottom: 4rem;
 }
 /* Since positioning the image, we need to help out the caption */
 .carousel-caption {
   bottom: 3rem;
-  z-index: 10;
+  z-index: 1;
 }
 
 /* Declare heights because of positioning of img element */
 .carousel-item {
+  background-image: 0%;
   height: 32rem;
 }
 .carousel-item > img {

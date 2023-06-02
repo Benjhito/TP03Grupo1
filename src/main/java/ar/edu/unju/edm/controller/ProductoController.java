@@ -39,7 +39,7 @@ public class ProductoController {
 	    return "modificarProducto";
 	}
 	
-	@GetMapping("/producto/mostrarListado")
+	@GetMapping("/mostrarListado")
 	  public ModelAndView mostrarListado() {
 	      ModelAndView mav = new ModelAndView("mostrarListado");
 	      mav.addObject("listado", unServicio.listarProducto());
@@ -81,6 +81,6 @@ public class ProductoController {
 	  @PostMapping("/producto/guardarModificacion")
 	  public String guardarModificacion(@ModelAttribute("producto") Producto producto) {
 	      unServicio.guardarProducto(producto);
-	      return "redirect:/producto/mostrarListado";
+	      return "redirect:/mostrarListado";
 	  }
 }
