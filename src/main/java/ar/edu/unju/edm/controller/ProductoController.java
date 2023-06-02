@@ -1,8 +1,10 @@
 package ar.edu.unju.edm.controller;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
 import org.springframework.beans.factory.annotation.Autowired;
 import ar.edu.unju.edm.model.Producto;
@@ -29,9 +31,24 @@ public class ProductoController {
 		
 		return name;
 	}
-
+	
+	@GetMapping("/producto/modificar")
+	public String mostrarFormularioModificar(@RequestParam("codigo") int codigo, Model modelo) {
+	    Producto producto = unServicio.buscarProductoPorCodigo(codigo);
+	    modelo.addAttribute("producto", producto);
+	    return "modificarProducto";
+	}
+	
+	@GetMapping("/producto/mostrarListado")
+	  public ModelAndView mostrarListado() {
+	      ModelAndView mav = new ModelAndView("mostrarListado");
+	      mav.addObject("listado", unServicio.listarProducto());
+	      return mav;
+	  }
+	
 	@PostMapping("/guardarProducto")
-	public ModelAndView cargarProducto(@ModelAttribute("producto") Producto nuevoProducto) {
+	public ModelAndView cargarProducto(@ModelAttribute("nuevoProducto") Producto nuevoProducto) {
+	    System.out.println("Cargando nuevo producto: " + nuevoProducto.toString());
 	    nuevoProducto.setEstado(true);
 	    unServicio.cargarProducto(nuevoProducto);
 	    
@@ -59,5 +76,11 @@ public class ProductoController {
 	      listadoFinal.addObject("listado", unServicio.listarProducto());
 	      
 	      return listadoFinal;
+	  }
+	  
+	  @PostMapping("/producto/guardarModificacion")
+	  public String guardarModificacion(@ModelAttribute("producto") Producto producto) {
+	      unServicio.guardarProducto(producto);
+	      return "redirect:/producto/mostrarListado";
 	  }
 }

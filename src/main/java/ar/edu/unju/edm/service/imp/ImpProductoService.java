@@ -10,8 +10,17 @@ public class ImpProductoService implements ProductoService {
 
 	@Override
 	public void cargarProducto(Producto nuevoProducto) {
-		nuevoProducto.setEstado(true);
-		Productos.getListadoDeProductos().add(nuevoProducto);
+	    nuevoProducto.setEstado(true);
+	    ArrayList<Producto> listaProductos = Productos.getListadoDeProductos();
+	    if (listaProductos.isEmpty()) {
+	        listaProductos.add(nuevoProducto);
+	    } else {
+	        Producto productoExistente = buscarProductoPorCodigo(nuevoProducto.getCodigo());
+	        if (productoExistente != null) {
+	            listaProductos.remove(productoExistente);
+	        }
+	        listaProductos.add(nuevoProducto);
+	    }
 	}
 
 	@Override
@@ -55,5 +64,26 @@ public class ImpProductoService implements ProductoService {
 		// TODO Auto-generated method stub
 		return null;
 	}
-
+	
+	@Override
+	public void guardarProducto(Producto producto) {
+	    producto.setEstado(true);
+	    ArrayList<Producto> listaProductos = Productos.getListadoDeProductos();
+	    Producto productoExistente = buscarProductoPorCodigo(producto.getCodigo());
+	    if (productoExistente != null) {
+	        listaProductos.remove(productoExistente);
+	    }
+	    listaProductos.add(producto);
+	}
+	
+	@Override
+	public Producto buscarProductoPorCodigo(Integer codigo) {
+		ArrayList<Producto> listaProductos = Productos.getListadoDeProductos();
+		for (Producto producto : listaProductos) {
+	        if (producto.getCodigo().equals(codigo)) {
+	            return producto;
+	        }
+	    }
+	    return null;
+	}
 }

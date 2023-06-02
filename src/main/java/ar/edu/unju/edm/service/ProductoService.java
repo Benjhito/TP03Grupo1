@@ -11,4 +11,6 @@ public interface ProductoService {
 	public Producto eliminarUnProducto(Integer codigo);
 	public void eliminarTodosLosProductos();
 	public Producto modificarUnProducto(Integer codigo);
+	public void guardarProducto(Producto producto);
+	public Producto buscarProductoPorCodigo(Integer codigo);
 }

@@ -15,6 +15,7 @@
 			<p class="card-title" th:text="${prod.desc}"></p>
 			<p class="card-text" th:text="${prod.precio}"></p>
 			<a href="#" class="btn btn-primary">Comprar</a>
+			<a th:href="@{/producto/modificar(codigo=${prod.codigo})}" class="btn btn-warning">Modificar</a>
 			<form th:action="@{/eliminarProducto}" method="post">
 			  <input type="hidden" name="codigo" th:value="${prod.codigo}" />
 			  <button type="submit" class="btn btn-danger">Eliminar</button>
